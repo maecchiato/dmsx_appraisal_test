@@ -1,0 +1,12 @@
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\bin\Debug\rnd_employee.exe
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\bin\Debug\rnd_employee.pdb
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\bin\Debug\rnd_employee.xml
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.vbprojAssemblyReference.cache
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.Form1.resources
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.Resources.resources
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.vbproj.GenerateResource.cache
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.vbproj.CoreCompileInputs.cache
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.exe
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.xml
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.pdb
+C:\Users\MIS07.WTI\source\repos\rnd_employee\rnd_employee\obj\Debug\rnd_employee.ucEmpData.resources
