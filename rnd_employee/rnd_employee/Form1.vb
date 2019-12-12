@@ -74,11 +74,11 @@ Public Class Form1
         Dim sQuery As String = "SELECT D.DName, A.AName, idMasterFile, unMasterFile, MF.unAccountUser, unPayrollSetupCustom, MF.unBusinessUnit, MF.unArea, MF.unDepartment, unBranch, unConfidentialityLevel, unBank, unChartTaxStatus, unJobTitle, MFEmployeeNumber, MFPayrollCategory, MFPayrollTerm, MFPayrollMode, MFCivilStatus, MFLaborGroup, MFEmploymentStatus, MFLastName, MFFirstName, MFMiddleName, MFSuffix, MFPhoto, MFBirthdate, MFAddress1, MFAddress2 , MFContactNumber1, MFContactNumber2, MFGender, MFDateHired, MFDateSeparated, MFDateCleared, MFSSS, MFPhilHealth, MFPagibig       , MFTaxID       , MFBankAccountNumber       , MFMonthlyRate       , MFDailyRate       , MFMonthlyAllowance, MFDailyAllowance, MFCola, MFTax, MF.[TimeStamp], MF.[Status]  FROM MasterFile AS MF 
                         Join Department as D on D.unDepartment = MF.unDepartment
                         Join Area as A on A.unArea = MF.unArea
-                        WHERE MFLastName like '%'+@search+'%' OR MFFirstName like '%'+@search+'%' AND D.DName ='Management Information Systems' AND A.AName='Iloilo' AND MF.MFEmploymentStatus='Regular' Order By MFLastName Asc"
+                        WHERE MF.MFEmploymentStatus='Regular' AND D.DName like '%'+@deptsearch+'%' AND  MFLastName like '%'+@search+'%' OR MFFirstName like '%'+@search+'%' AND A.AName='Iloilo' Order By MFLastName Asc"
         Using WTGCConnection = New SqlConnection(WTGCConnectionString)
             WTGCConnection.Open()
             Using oCommand As New SqlCommand(sQuery, WTGCConnection)
-                oCommand.Parameters.AddWithValue("@deptsearch", "Management Information Systems")
+                oCommand.Parameters.AddWithValue("@deptsearch", ComboBox1.Text)
                 oCommand.Parameters.AddWithValue("@search", TextBox1.Text.Trim.Replace(" "c, "%"c))
                 Dim oReader As SqlDataReader = oCommand.ExecuteReader
                 While oReader.Read
@@ -93,11 +93,11 @@ Public Class Form1
         Dim pQuery As String = "SELECT D.DName, A.AName, idMasterFile, unMasterFile, MF.unAccountUser, unPayrollSetupCustom, MF.unBusinessUnit, MF.unArea, MF.unDepartment, unBranch, unConfidentialityLevel, unBank, unChartTaxStatus, unJobTitle, MFEmployeeNumber, MFPayrollCategory, MFPayrollTerm, MFPayrollMode, MFCivilStatus, MFLaborGroup, MFEmploymentStatus, MFLastName, MFFirstName, MFMiddleName, MFSuffix, MFPhoto, MFBirthdate, MFAddress1, MFAddress2 , MFContactNumber1, MFContactNumber2, MFGender, MFDateHired, MFDateSeparated, MFDateCleared, MFSSS, MFPhilHealth, MFPagibig       , MFTaxID       , MFBankAccountNumber       , MFMonthlyRate       , MFDailyRate       , MFMonthlyAllowance, MFDailyAllowance, MFCola, MFTax, MF.[TimeStamp], MF.[Status]  FROM MasterFile AS MF 
                         Join Department as D on D.unDepartment = MF.unDepartment
                         Join Area as A on A.unArea = MF.unArea
-                        WHERE MFLastName like '%'+@search+'%' OR MFFirstName like '%'+@search+'%' AND D.DName ='Management Information Systems' AND A.AName='Iloilo' AND MF.MFEmploymentStatus='Probationary' Order By MFLastName Asc"
+                        WHERE MF.MFEmploymentStatus='Probationary' AND D.DName like '%'+@deptsearch+'%' AND MFLastName like '%'+@search+'%' OR MFFirstName like '%'+@search+'%' AND A.AName='Iloilo' Order By MFLastName Asc"
         Using WTGCConnection = New SqlConnection(WTGCConnectionString)
             WTGCConnection.Open()
             Using oCommand As New SqlCommand(pQuery, WTGCConnection)
-                oCommand.Parameters.AddWithValue("@deptsearch", "Management Information Systems")
+                oCommand.Parameters.AddWithValue("@deptsearch", ComboBox1.Text)
                 oCommand.Parameters.AddWithValue("@search", TextBox1.Text.Trim.Replace(" "c, "%"c))
                 Dim oReader As SqlDataReader = oCommand.ExecuteReader
                 While oReader.Read
@@ -182,9 +182,9 @@ Public Class Form1
     End Sub
 
     'Open the data from lvSRC
-    Private Sub OpenNewEmpProfileTab()
+    Private Sub OpenNewEmpProfileTab(lv As ListView)
         For Each oTabSelect As TabPage In tcProfile.TabPages
-            If oTabSelect.Text = lvRegList.SelectedItems(0).Text Then
+            If oTabSelect.Text = lv.SelectedItems(0).Text Then
                 tcProfile.SelectedTab = oTabSelect
                 Return
             End If
@@ -195,7 +195,7 @@ Public Class Form1
         'oSED.idOrderControlCommi = lvRegList.SelectedItems(0).Tag
 
         Dim oTab As New TabPage
-        oTab.Text = lvRegList.SelectedItems(0).Text
+        oTab.Text = lv.SelectedItems(0).Text
         oTab.Controls.Add(oSED)
 
         tcProfile.TabPages.Add(oTab)
@@ -203,7 +203,10 @@ Public Class Form1
     End Sub
 
     Private Sub lvRegList_DoubleClick(sender As Object, e As EventArgs) Handles lvRegList.DoubleClick
-        OpenNewEmpProfileTab()
+        OpenNewEmpProfileTab(lvRegList)
     End Sub
 
+    Private Sub lvProbiList_DoubleClick(sender As Object, e As EventArgs) Handles lvProbiList.DoubleClick
+        OpenNewEmpProfileTab(lvProbiList)
+    End Sub
 End Class
